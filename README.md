@@ -40,7 +40,8 @@
 - [ ] Notification system
 - [ ] Subject registration Form
 
-- [ ] Notification Box
-      > - [ ] Subject Name
->    - [ ] Date
->    - [ ] Time
+
+## **- [ ] Notification Box**
+>     - [ ] Subject Name
+>     - [ ] Date
+>     - [ ] Time
