@@ -41,6 +41,6 @@
 - [ ] Subject registration Form
 
 - [ ] Notification Box
-      >- [ ] Subject Name
+      > - [ ] Subject Name
 >    - [ ] Date
 >    - [ ] Time
