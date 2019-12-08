@@ -39,3 +39,8 @@
 - [ ] Dashboard (welcome page)
 - [ ] Notification system
 - [ ] Subject registration Form
+
+- [ ] Notification Box
+      > - [ ] Subject Name
+      > - [ ] Date
+      > - [ ] Time
