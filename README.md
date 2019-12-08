@@ -42,6 +42,6 @@
 
 
 ## **Notification Box**
-> -  - [ ] Subject Name
-> -  - [ ] Date
-> -  - [ ] Time
+>   - [ ] Subject Name
+>   - [ ] Date
+>   - [ ] Time
