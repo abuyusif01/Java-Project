@@ -1,62 +1,62 @@
 ## **Requirements**
-- [ ] Login
-- [ ] Registration
-- [ ] Forgot Password
+- [ ] Login Form
+- [ ] Registration Form
+- [ ] Forgot Password Form
 - [ ] Notification Box
-- [ ] Subject Registration
-- [ ] Dashboard
+- [ ] Subject Registration Form
+- [ ] Dashboard Essentials
 
 
 ## **Login**
->   - [ ] Username Field
->   - [ ] Password Field
->   - [ ] Login Button
->   - [ ] Forgot Pass Button
+   - [ ] Username Field
+   - [ ] Password Field
+   - [ ] Login Button
+   - [ ] Forgot Pass Button
 
 
 ## **Registration**
->   - [ ] Email Field
->   - [ ] First Name Field
->   - [ ] Last Name Field
->   - [ ] Username Field
->   - [ ] Password Fiel
->   - [ ] Repeat Password Field
->   - [ ] Register Button
->   - [ ] Already have Account Button
+   - [ ] Email Field
+   - [ ] First Name Field
+   - [ ] Last Name Field
+   - [ ] Username Field
+   - [ ] Password Fiel
+   - [ ] Repeat Password Field
+   - [ ] Register Button
+   - [ ] Already have Account Button
 
 
 ## **Forgot Username Or Password**
->   - [ ] Username Field
->   - [ ] Email Field
->   - [ ] Verification Code Field
->   - [ ] Reset Pass Button
+   - [ ] Username Field
+   - [ ] Email Field
+   - [ ] Verification Code Field
+   - [ ] Reset Pass Button
 
 
 ## **Notification Box**
->   - [ ] Subject Name Text
->   - [ ] Date
->   - [ ] Time
+   - [ ] Subject Name Text
+   - [ ] Date
+   - [ ] Time
 
 
 ## **Subject Registration Form**
->   - [ ] Semester Field
->   - [ ] Subject Name Field
->   - [ ] Important Dates (include Assignments, Quizes, and all those shit) Text
+   - [ ] Semester Field
+   - [ ] Subject Name Field
+   - [ ] Important Dates (include Assignments, Quizes, and all those shit) Text
 
 
 ## **Dashboard**
 - [ ] Pie Chart Of Sem
 
 - [ ] Schedule
->   - Due Date Text
->   - List All Text
+   - Due Date Text
+   - List All Text
 - [ ] Edit Schedule
->   - Change Due date Field
->   - Delete Subject Field
+   - Change Due date Field
+   - Delete Subject Field
 - [ ] Settings
->   - Change Username Field
->   - Change Password Field
->   - Change Email Field
+   - Change Username Field
+   - Change Password Field
+   - Change Email Field
 - [ ] About
->    - Version And Credits Text
+    - Version And Credits Text
 
