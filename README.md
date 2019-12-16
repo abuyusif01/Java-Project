@@ -1,9 +1,9 @@
 ## **Requirements**
-- [ ] Login Form
-- [ ] Registration Form
-- [ ] Forgot Password Form
+- [x] Login Form
+- [x] Registration Form
+- [x] Forgot Password Form
 - [ ] Notification Box
-- [ ] Subject Registration Form
+- [x] Subject Registration Form
 - [ ] Dashboard Essentials
 
 
