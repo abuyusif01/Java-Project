@@ -94,9 +94,6 @@ public class forgot_password extends Application {
         gridPane.add(submitButton, 1, 4);
         GridPane.setHalignment(submitButton, HPos.CENTER);
 
-        //create user info
-        user_info Credentials = new user_info();
-
 
         submitButton.setOnAction(event -> {
             if(nameField.getText().isEmpty()) {
@@ -104,11 +101,8 @@ public class forgot_password extends Application {
                 return;
             }
 
-            showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Successfully!","Successfully reset password");
+            showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Successfully!","Receive link?");
         });
-        var search_user = new search_user();
-        search_user.search_user(nameField.getText());
-        System.out.println();
 
     }
 

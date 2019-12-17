@@ -1,6 +1,6 @@
-package Login;
+package Sub_Reg;
 
-import Registration.*;
+import Registration.user_info;
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -12,22 +12,24 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Login extends Application {
+public class Search_Subject extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        primaryStage.setTitle("Login");
+        primaryStage.setTitle("Forgot Password");
 
         // Create the registration form grid pane
         GridPane gridPane = createRegistrationFormPane();
+
         // Add UI controls to the registration form grid pane
         addUIControls(gridPane);
+
         // Create a scene with registration form grid pane as the root node
         Scene scene = new Scene(gridPane, 800, 500);
+
         // Set the scene in primary stage
         primaryStage.setScene(scene);
 
@@ -43,7 +45,7 @@ public class Login extends Application {
         gridPane.setAlignment(Pos.CENTER);
 
         // Set a padding of 20px on each side
-        gridPane.setPadding(new Insets(20, 20, 20, 20));
+        gridPane.setPadding(new Insets(10, 10, 10, 10));
 
         // Set the horizontal gap between columns
         gridPane.setHgap(5);
@@ -52,7 +54,6 @@ public class Login extends Application {
         gridPane.setVgap(5);
 
         // Add Column Constraints
-
         // columnOneConstraints will be applied to all the nodes placed in column one.
         ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 100, Double.MAX_VALUE);
         columnOneConstraints.setHalignment(HPos.RIGHT);
@@ -67,79 +68,57 @@ public class Login extends Application {
     }
 
     private void addUIControls(GridPane gridPane) throws IOException {
+
         // Add Header
-        Label headerLabel = new Label("Login Form");
-        Button help_forget = new Button("Need help?");
-        help_forget.applyCss();
-        help_forget.setUnderline(true);
-
+        Label headerLabel = new Label("Search_Subject");
+        headerLabel.setAlignment(Pos.TOP_CENTER);
         headerLabel.setFont(Font.font("Fira Code", FontWeight.BOLD, 24));
-        gridPane.add(headerLabel, 0,0,2,1);
-
+        gridPane.add(headerLabel, 0,0,3,1);
         GridPane.setHalignment(headerLabel, HPos.CENTER);
-//        GridPane.setMargin(headerLabel, new Insets(20, 0,20,0));
-
-        // Add Name Laabel
-        Label nameLabel = new Label("User Name : ");
-        gridPane.add(nameLabel, 0,1);
+//        GridPane.setMargin(headerLabel, new Insets(10, 0,10,0));
 
         // Add Name Text Field
-        TextField nameField = new TextField();
-        nameField.setPromptText("Enter Your Username");
-        nameField.setFocusTraversable(false);
-//        nameField.setPrefHeight(30);
-        gridPane.add(nameField, 1,1);
+        TextField Email = new TextField();
+        Email.setPromptText("Enter Email");
+        Email.setFocusTraversable(false);
+        Email.setPrefHeight(30);
+        gridPane.add(Email, 1,1);
 
-
-        // Add Password Label
-        Label passwordLabel = new Label("Password : ");
-        gridPane.add(passwordLabel, 0, 3);
-
-        // Add Password Field
-        PasswordField passwordField = new PasswordField();
-        passwordField.setPromptText("Enter Your password");
-        passwordField.setFocusTraversable(false);
-//        passwordField.setPrefHeight(30);
-        gridPane.add(passwordField, 1, 3);
+        // Add Name Text Field
+        TextField Subject_name = new TextField();
+        Subject_name.setPromptText("Subject Code");
+        Subject_name.setFocusTraversable(false);
+        Subject_name.setPrefHeight(30);
+        gridPane.add(Subject_name, 1,2);
 
         // Add Submit Button
-        Button submitButton = new Button("Login");
-        submitButton.setPrefHeight(10);
+        Button submitButton = new Button("Ok");
         submitButton.setDefaultButton(true);
-        help_forget.setDefaultButton(true);
-        submitButton.setPrefWidth(100);
+        submitButton.setMaxWidth(Double.MAX_VALUE);
         submitButton.setAlignment(Pos.CENTER);
-
         gridPane.add(submitButton, 1, 4);
-        gridPane.add(help_forget,1,4);
-        GridPane.setHalignment(submitButton, HPos.LEFT);
-        GridPane.setHalignment(help_forget,HPos.RIGHT);
-        GridPane.setMargin(submitButton, new Insets(10, 0,10,0));
+        GridPane.setHalignment(submitButton, HPos.CENTER);
 
 
-        //method for authentication
-        user_info Credentials = new user_info();
-        final boolean[] search = {false};
-
-        try {
-            Credentials.auth("sdf", "sf");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        Registration.user_info Credentials = new user_info();
+        final String[] found = new String[1];
         submitButton.setOnAction(event -> {
-            if(nameField.getText().isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your name");
+            if(Email.getText().isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your Email");
                 return;
             }
-            if(passwordField.getText().isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter a password");
+            if (Subject_name.getText().isEmpty()){showAlert(Alert.AlertType.ERROR,gridPane.getScene().getWindow(),"Error","Pls Subject name");
+            return;
             }
-            if (search[0]) {
-                showAlert(Alert.AlertType.WARNING, gridPane.getScene().getWindow(), "Form Error! ", "Sorry ma' nibba Imvalid Credentials");
-                return;
+            try {
+                found[0] = Credentials.getUser_subject(Email.getText(),Subject_name.getText());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
+            showAlert(Alert.AlertType.INFORMATION,gridPane.getScene().getWindow(),"Success",found[0]);
         });
     }
+
     private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
