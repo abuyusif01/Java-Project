@@ -1,18 +1,16 @@
 package Registration;
-import java.io.*;
 
+import java.io.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
-import java.lang.Object;
 public class user_info {
 
     String filePath_user_info = "/home/blackdracula/git/java-project/dracula_version/src/Resources/User_info";
     String filePath_user_subject = "/home/blackdracula/git/java-project/dracula_version/src/Resources/User_Subject";
     public List<String> allLines = Files.readAllLines(Paths.get(filePath_user_info));
-    boolean search = false;
     public user_info() throws IOException {
     }
 
@@ -71,33 +69,25 @@ public class user_info {
 
     //for searching purposes
     public  String getUser_subject(String Email, String Subject_Code) throws FileNotFoundException {
-        Scanner read_file;
+        Scanner read_file = new Scanner(new File(filePath_user_subject));
         String fileEmail,fileSubject_Code;
-        read_file = new Scanner(new File(filePath_user_subject));
-        while (true){
+        while (read_file.hasNextLine()){
             fileEmail = read_file.next();
             fileSubject_Code = read_file.next();
             if(fileEmail.equals(Email)&&fileSubject_Code.equals(Subject_Code)){
             return "file Found"; }
         }
+        return "file not found";
     }
 
     public boolean auth(String Username, String Password) throws FileNotFoundException {
-        Scanner read_file;
+        Scanner read_file = new Scanner(new File(filePath_user_info));
         String fileUsername,filePassword;
-        read_file = new Scanner(new File(filePath_user_info));
         while (read_file.hasNextLine()){
             fileUsername = read_file.next();
             filePassword = read_file.next();
-            System.out.println(fileUsername);
-            System.out.println(Username);
-            System.out.println(filePassword);
-            System.out.println(Password);
-
-            if (fileUsername.equals(Username)&&filePassword.equals(Password)){
-                return true;
-            }
+            return fileUsername.equals(Username) && filePassword.equals(Password);
         }
-        return  false;
+        return false;
     }
 }

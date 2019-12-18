@@ -1,7 +1,6 @@
 package Sub_Reg;
 
 import Registration.*;
-import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,11 +14,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class subject_registration extends Application {
-
-    @Override
-    public void start(Stage FirstStage) throws IOException {
-
+public class subject_registration  {
+    public Scene first_scene;
+    public Stage test;
+    public GridPane gridPane =  new GridPane();
+    public void start() throws IOException {
+        Stage FirstStage = new Stage();
         //main text
         Text Main_text = new Text("Subject Registration");
         Main_text.setFont(Font.font("Fira Code", FontWeight.SEMI_BOLD,20));
@@ -83,7 +83,6 @@ public class subject_registration extends Application {
         Submit_subject.setDefaultButton(true);
 
         //create grid_pane and some needed settings
-        GridPane gridPane =  new GridPane();
         gridPane.setHgap(5);
         gridPane.setVgap(5);
 
@@ -109,14 +108,18 @@ public class subject_registration extends Application {
             Credentials.insert_user_subject(Email.getText(),Subject_name_field.getText());
             FirstStage.close();
         });
-
         //no need to comment
-        Scene first_scene = new Scene(gridPane);
+        first_scene = new Scene(gridPane);
+        this.test=return_stage(FirstStage);
         FirstStage.setScene(first_scene);
-        FirstStage.setTitle("Subject Registration");
+
         FirstStage.show();
     }
-    public static void main(String[] args) {
-        launch(args);
+    public Stage return_stage(Stage stage){
+        return stage;
     }
+    public Scene return_scene(Scene scene){
+        return scene;
+    }
+
 }

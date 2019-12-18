@@ -1,5 +1,6 @@
 package Login;
 
+import Forgot_password.forgot_password;
 import Registration.*;
 import javafx.application.Application;
 import javafx.geometry.HPos;
@@ -119,6 +120,8 @@ public class Login extends Application {
 
         //method for authentication
         user_info Credentials = new user_info();
+        forgot_password forget_pass = new forgot_password();
+
         boolean[] search = {false};
 
 
@@ -131,19 +134,22 @@ public class Login extends Application {
                 showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter a password");
             }
             try {
-                search[0] = Credentials.auth(nameField.getText(),passwordField.getText());
+                 search[0] = Credentials.auth(nameField.getText(),passwordField.getText());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            if (!search[0]) {
-                showAlert(Alert.AlertType.WARNING, gridPane.getScene().getWindow(), "Form Error! ", "Sorry ma' nibba Imvalid Credentials");
-                return;
-            }
             if(search[0]){
-                showAlert(Alert.AlertType.INFORMATION, gridPane.getScene().getWindow(), "Logged in","welcome back "+nameField.getText());
+                showAlert(Alert.AlertType.INFORMATION, gridPane.getScene().getWindow(), "Logged in...", "Welcome back "+nameField.getText());
+            }else{
+                showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Logged in...", "Check your Credentials and try again");
             }
+
+        });
+        help_forget.setOnAction(e-> {
+                forget_pass.start();
         });
     }
+
     private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

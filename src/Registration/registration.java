@@ -1,70 +1,34 @@
 package Registration;
 
-import javafx.application.Application;
+import Forgot_password.forgot_password;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import java.io.IOException;
 
-public class registration extends Application {
+public class registration  {
 
-    @Override
-    public void start(Stage primaryStage) throws IOException {
-        primaryStage.setTitle("Registration Form JavaFX Application");
+    public void start() throws IOException {
+        Stage primaryStage = new Stage();
+        primaryStage.setTitle("Registration Form");
 
         // Create the registration form grid pane
         GridPane gridPane = createRegistrationFormPane();
-        // Add UI controls to the registration form grid pane
-        addUIControls(gridPane);
+
         // Create a scene with registration form grid pane as the root node
         Scene scene = new Scene(gridPane, 800, 500);
         // Set the scene in primary stage
-        primaryStage.setScene(scene);
-
-
-        primaryStage.show();
-    }
-
-
-    private GridPane createRegistrationFormPane() {
-        // Instantiate a new Grid Pane
-        GridPane gridPane = new GridPane();
-
-        // Position the pane at the center of the screen, both vertically and horizontally
-        gridPane.setAlignment(Pos.CENTER);
-
-        // Set a padding of 20px on each side
-        gridPane.setPadding(new Insets(40, 40, 40, 40));
-
-        // Set the horizontal gap between columns
-        gridPane.setHgap(10);
-
-        // Set the vertical gap between rows
-        gridPane.setVgap(10);
-
-        // Add Column Constraints
-
-        // columnOneConstraints will be applied to all the nodes placed in column one.
-        ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 100, Double.MAX_VALUE);
-        columnOneConstraints.setHalignment(HPos.RIGHT);
-
-        // columnTwoConstraints will be applied to all the nodes placed in column two.
-        ColumnConstraints columnTwoConstrains = new ColumnConstraints(200, 200, Double.MAX_VALUE);
-        columnTwoConstrains.setHgrow(Priority.ALWAYS);
-
-        gridPane.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains);
-
-        return gridPane;
-    }
-
-    private void addUIControls(GridPane gridPane) throws IOException {
         // Add Header
         Label headerLabel = new Label("Registration Form");
         headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
@@ -111,7 +75,7 @@ public class registration extends Application {
 
         //create obj to store user data
         user_info Credentials = new user_info();
-        boolean x;
+        forgot_password bull = new forgot_password();
 
         submitButton.setOnAction(event -> {
             if (nameField.getText().isEmpty()) {
@@ -129,9 +93,44 @@ public class registration extends Application {
 
             //try adding registered user to user_info file
             Credentials.insert_user_info(emailField.getText(),passwordField.getText(),nameField.getText());
+            bull.start();
 
-            showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Successful!", "Welcome " + nameField.getText());
         });
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+
+    private GridPane createRegistrationFormPane() {
+        // Instantiate a new Grid Pane
+        GridPane gridPane = new GridPane();
+
+        // Position the pane at the center of the screen, both vertically and horizontally
+        gridPane.setAlignment(Pos.CENTER);
+
+        // Set a padding of 20px on each side
+        gridPane.setPadding(new Insets(40, 40, 40, 40));
+
+        // Set the horizontal gap between columns
+        gridPane.setHgap(10);
+
+        // Set the vertical gap between rows
+        gridPane.setVgap(10);
+
+        // Add Column Constraints
+
+        // columnOneConstraints will be applied to all the nodes placed in column one.
+        ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 100, Double.MAX_VALUE);
+        columnOneConstraints.setHalignment(HPos.RIGHT);
+
+        // columnTwoConstraints will be applied to all the nodes placed in column two.
+        ColumnConstraints columnTwoConstrains = new ColumnConstraints(200, 200, Double.MAX_VALUE);
+        columnTwoConstrains.setHgrow(Priority.ALWAYS);
+
+        gridPane.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains);
+
+        return gridPane;
     }
 
     private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
@@ -143,8 +142,31 @@ public class registration extends Application {
         alert.show();
     }
 
-    public static void main (String[]args){
-        launch(args);
-    }
-}
+    public void display(String title, String Username, String btn_1,Scene new_window) {
+        Stage window = new Stage();
 
+        //Block events to other windows
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle(title);
+        window.setMinWidth(250);
+
+        Label label = new Label();
+        label.setText("You're Welcome "+Username);
+        Button exit = new Button("exit");
+        Button goto_subject = new Button(btn_1);
+
+        goto_subject.setOnAction(e -> window.setScene(new_window));
+        exit.setOnAction(e -> window.close());
+
+        VBox layout = new VBox(10);
+        layout.setSpacing(10);
+        layout.getChildren().addAll(label, exit, goto_subject);
+        layout.setAlignment(Pos.CENTER);
+
+        //Display window and wait for it to be closed before returning
+        Scene scene = new Scene(layout);
+        window.setScene(scene);
+        window.showAndWait();
+    }
+
+}
