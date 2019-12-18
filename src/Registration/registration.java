@@ -28,6 +28,7 @@ public class registration extends Application {
         // Set the scene in primary stage
         primaryStage.setScene(scene);
 
+
         primaryStage.show();
     }
 
@@ -110,6 +111,7 @@ public class registration extends Application {
 
         //create obj to store user data
         user_info Credentials = new user_info();
+        boolean x;
 
         submitButton.setOnAction(event -> {
             if (nameField.getText().isEmpty()) {

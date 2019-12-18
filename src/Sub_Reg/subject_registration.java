@@ -107,6 +107,7 @@ public class subject_registration extends Application {
         //create event handler
         Submit_subject.setOnAction(e ->{
             Credentials.insert_user_subject(Email.getText(),Subject_name_field.getText());
+            FirstStage.close();
         });
 
         //no need to comment

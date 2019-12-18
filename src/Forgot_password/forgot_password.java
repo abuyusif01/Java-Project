@@ -1,6 +1,5 @@
 package Forgot_password;
 
-import Registration.user_info;
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -13,11 +12,10 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-import javax.naming.directory.SearchControls;
 import java.io.IOException;
 
 public class forgot_password extends Application {
-
+    public boolean scene_change =false;
     @Override
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Forgot Password");
@@ -30,11 +28,12 @@ public class forgot_password extends Application {
 
         // Create a scene with registration form grid pane as the root node
         Scene scene = new Scene(gridPane, 800, 500);
-
         // Set the scene in primary stage
         primaryStage.setScene(scene);
-
         primaryStage.show();
+        if(scene_change){
+            primaryStage.close();
+        }
     }
 
 
@@ -100,8 +99,8 @@ public class forgot_password extends Application {
                 showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your Email");
                 return;
             }
-
             showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Successfully!","Receive link?");
+            scene_change = true;
         });
 
     }

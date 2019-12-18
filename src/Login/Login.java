@@ -119,13 +119,9 @@ public class Login extends Application {
 
         //method for authentication
         user_info Credentials = new user_info();
-        final boolean[] search = {false};
+        boolean[] search = {false};
 
-        try {
-            Credentials.auth("sdf", "sf");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+
         submitButton.setOnAction(event -> {
             if(nameField.getText().isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your name");
@@ -134,9 +130,17 @@ public class Login extends Application {
             if(passwordField.getText().isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter a password");
             }
-            if (search[0]) {
+            try {
+                search[0] = Credentials.auth(nameField.getText(),passwordField.getText());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            if (!search[0]) {
                 showAlert(Alert.AlertType.WARNING, gridPane.getScene().getWindow(), "Form Error! ", "Sorry ma' nibba Imvalid Credentials");
                 return;
+            }
+            if(search[0]){
+                showAlert(Alert.AlertType.INFORMATION, gridPane.getScene().getWindow(), "Logged in","welcome back "+nameField.getText());
             }
         });
     }

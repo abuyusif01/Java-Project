@@ -86,13 +86,18 @@ public class user_info {
         Scanner read_file;
         String fileUsername,filePassword;
         read_file = new Scanner(new File(filePath_user_info));
-        while (true){
+        while (read_file.hasNextLine()){
             fileUsername = read_file.next();
             filePassword = read_file.next();
+            System.out.println(fileUsername);
+            System.out.println(Username);
+            System.out.println(filePassword);
+            System.out.println(Password);
+
             if (fileUsername.equals(Username)&&filePassword.equals(Password)){
-                this.search = true;
                 return true;
             }
         }
+        return  false;
     }
 }
