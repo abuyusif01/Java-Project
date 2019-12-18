@@ -13,7 +13,6 @@ import javafx.stage.Window;
 
 
 public class forgot_password {
-
     public void start() {
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Forgot Password");
@@ -25,6 +24,10 @@ public class forgot_password {
 
         // Create a scene with registration form grid pane as the root node
         Scene scene = new Scene(gridPane, 800, 500);
+
+        String css = getClass().getResource("forgot_password.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
         // Set the scene in primary stage
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -1,0 +1,24 @@
+.button {
+   -fx-text-fill:  #e5e9f0;
+   -fx-background-color: #81a1c1;
+   -fx-background-radius: 10;
+
+}
+
+.root {
+    -fx-background-color: #555559;
+    -fx-font-family: "Fira Code";
+}
+
+.text-field {
+    -fx-background-color: #81a1c1 ,#3b4254 , #555559;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 1 -1;
+    -fx-fill: #3b4254;
+    /*-fx-prompt-text-fill: #4c566a;*/
+}
+
+.text-field:focused {
+    -fx-background-color: #a9a9a9 , #3b4254 , #555559;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 1 -1;
+    /*-fx-text-fill: #4c566a;*/
+}

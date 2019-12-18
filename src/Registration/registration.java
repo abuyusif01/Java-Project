@@ -9,10 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import java.io.IOException;
@@ -79,15 +77,15 @@ public class registration  {
 
         submitButton.setOnAction(event -> {
             if (nameField.getText().isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your name");
+                showAlert(gridPane.getScene().getWindow(), "Form Error!", "Please enter your name");
                 return;
             }
             if (emailField.getText().isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your email id");
+                showAlert(gridPane.getScene().getWindow(), "Form Error!", "Please enter your email id");
                 return;
             }
             if (passwordField.getText().isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter a password");
+                showAlert(gridPane.getScene().getWindow(), "Form Error!", "Please enter a password");
                 return;
             }
 
@@ -133,40 +131,13 @@ public class registration  {
         return gridPane;
     }
 
-    private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
-        Alert alert = new Alert(alertType);
+    private void showAlert(Window owner, String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.initOwner(owner);
         alert.show();
-    }
-
-    public void display(String title, String Username, String btn_1,Scene new_window) {
-        Stage window = new Stage();
-
-        //Block events to other windows
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle(title);
-        window.setMinWidth(250);
-
-        Label label = new Label();
-        label.setText("You're Welcome "+Username);
-        Button exit = new Button("exit");
-        Button goto_subject = new Button(btn_1);
-
-        goto_subject.setOnAction(e -> window.setScene(new_window));
-        exit.setOnAction(e -> window.close());
-
-        VBox layout = new VBox(10);
-        layout.setSpacing(10);
-        layout.getChildren().addAll(label, exit, goto_subject);
-        layout.setAlignment(Pos.CENTER);
-
-        //Display window and wait for it to be closed before returning
-        Scene scene = new Scene(layout);
-        window.setScene(scene);
-        window.showAndWait();
     }
 
 }

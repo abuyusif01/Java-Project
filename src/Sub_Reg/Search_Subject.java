@@ -1,7 +1,6 @@
 package Sub_Reg;
 
 import Registration.user_info;
-import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,10 +14,9 @@ import javafx.stage.Window;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Search_Subject extends Application {
-
-    @Override
-    public void start(Stage primaryStage) throws IOException {
+public class Search_Subject {
+    public void start() throws IOException {
+        Stage primaryStage = new Stage();
         primaryStage.setTitle("Forgot Password");
 
         // Create the registration form grid pane
@@ -128,7 +126,4 @@ public class Search_Subject extends Application {
         alert.show();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -18,11 +19,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Login extends Application {
-
+    Stage test;
     @Override
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Login");
-
+        this.test = primaryStage;
         // Create the registration form grid pane
         GridPane gridPane = createRegistrationFormPane();
 
@@ -31,7 +32,7 @@ public class Login extends Application {
 
         // Create a scene with registration form grid pane as the root node
         Scene scene = new Scene(gridPane, 800, 500);
-        String css = getClass().getResource("Style.css").toExternalForm();
+        String css = getClass().getResource("Login.css").toExternalForm();
         scene.getStylesheets().add(css);
         primaryStage.setScene(scene);
 
@@ -124,7 +125,7 @@ public class Login extends Application {
 
         //method for authentication
         user_info Credentials = new user_info();
-        forgot_password forget_pass = new forgot_password();
+
 
         boolean[] search = {false};
 
@@ -149,7 +150,7 @@ public class Login extends Application {
             }
 
         });
-        help_forget.setOnAction(e-> forget_pass.start());
+        help_forget.setOnAction(e-> display("Need Help",this.test));
     }
 
     private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
@@ -161,6 +162,48 @@ public class Login extends Application {
         alert.show();
     }
 
+    public void display(String title, Stage new_window) {
+        Stage window = new Stage();
+
+        forgot_password forget_pass = new forgot_password();
+        //Block events to other windows
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle(title);
+        window.setMinWidth(250);
+        GridPane gridPane = new GridPane();
+
+        Label label = new Label();
+        label.setText("You're Welcome :) ");
+        Button exit = new Button("exit");
+        Button forgot = new Button("forgot pass");
+        Button new_user = new Button("New_User?");
+        new_user.setUnderline(true);
+//        new_user.setId("help_button");
+        new_user.setMaxWidth(Double.MAX_VALUE);
+        new_user.setAlignment(Pos.CENTER);
+        GridPane.setHalignment(new_user, HPos.CENTER);
+
+        exit Exit = new exit();
+        exit.setOnAction(e -> {Exit.platform_way(new_window,"Are You Sure Wanna Leave Login Page? ");window.close();});
+        forgot.setOnAction(e -> {forget_pass.start();Exit.platform_way(new_window,"Are You Sure Wanna exit? ");window.close();});
+//        new_user.setOnAction(e -> );
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.add(label, 0,0,2,1);
+        gridPane.add(exit,0,4);
+        gridPane.add(new_user,0,5);
+        gridPane.add(forgot,0,6);
+        GridPane.setHalignment(label, HPos.CENTER);
+        label.setFont(Font.font("Fira Code", FontWeight.BOLD, 24));
+
+        //Display window and wait for it to be closed before returning
+        Scene scene = new Scene(gridPane);
+        String css = getClass().getResource("Login.css").toExternalForm();
+        scene.getStylesheets().add(css);
+        window.setScene(scene);
+        window.showAndWait();
+    }
     public static void main(String[] args) {
         launch(args);
     }
