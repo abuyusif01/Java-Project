@@ -25,11 +25,14 @@ public class Login extends Application {
 
         // Create the registration form grid pane
         GridPane gridPane = createRegistrationFormPane();
+
         // Add UI controls to the registration form grid pane
         addUIControls(gridPane);
+
         // Create a scene with registration form grid pane as the root node
         Scene scene = new Scene(gridPane, 800, 500);
-        // Set the scene in primary stage
+        String css = getClass().getResource("Style.css").toExternalForm();
+        scene.getStylesheets().add(css);
         primaryStage.setScene(scene);
 
         primaryStage.show();
@@ -71,43 +74,44 @@ public class Login extends Application {
         // Add Header
         Label headerLabel = new Label("Login Form");
         Button help_forget = new Button("Need help?");
-        help_forget.applyCss();
+        help_forget.setId("help_button");
         help_forget.setUnderline(true);
+        help_forget.setFocusTraversable(true);
 
         headerLabel.setFont(Font.font("Fira Code", FontWeight.BOLD, 24));
         gridPane.add(headerLabel, 0,0,2,1);
 
         GridPane.setHalignment(headerLabel, HPos.CENTER);
-//        GridPane.setMargin(headerLabel, new Insets(20, 0,20,0));
 
-        // Add Name Laabel
+        // Add Name Label
         Label nameLabel = new Label("User Name : ");
+        nameLabel.setId("name_label");
         gridPane.add(nameLabel, 0,1);
 
         // Add Name Text Field
         TextField nameField = new TextField();
         nameField.setPromptText("Enter Your Username");
+        nameField.setId("name_field");
         nameField.setFocusTraversable(false);
-//        nameField.setPrefHeight(30);
         gridPane.add(nameField, 1,1);
 
 
         // Add Password Label
         Label passwordLabel = new Label("Password : ");
+        passwordLabel.setId("password_label");
         gridPane.add(passwordLabel, 0, 3);
 
         // Add Password Field
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Enter Your password");
+        passwordField.setId("password_field");
         passwordField.setFocusTraversable(false);
-//        passwordField.setPrefHeight(30);
         gridPane.add(passwordField, 1, 3);
 
-        // Add Submit Button
+        // Add Login Button
         Button submitButton = new Button("Login");
+        submitButton.setId("Login_button");
         submitButton.setPrefHeight(10);
-        submitButton.setDefaultButton(true);
-        help_forget.setDefaultButton(true);
         submitButton.setPrefWidth(100);
         submitButton.setAlignment(Pos.CENTER);
 
@@ -145,9 +149,7 @@ public class Login extends Application {
             }
 
         });
-        help_forget.setOnAction(e-> {
-                forget_pass.start();
-        });
+        help_forget.setOnAction(e-> forget_pass.start());
     }
 
     private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
