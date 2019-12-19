@@ -14,12 +14,11 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Login extends Application {
-    Stage test;
+    public Stage test;
     @Override
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Login");
@@ -166,6 +165,7 @@ public class Login extends Application {
         Stage window = new Stage();
 
         forgot_password forget_pass = new forgot_password();
+        registration user_reg = new registration();
         //Block events to other windows
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
@@ -178,15 +178,20 @@ public class Login extends Application {
         Button forgot = new Button("forgot pass");
         Button new_user = new Button("New_User?");
         new_user.setUnderline(true);
-//        new_user.setId("help_button");
         new_user.setMaxWidth(Double.MAX_VALUE);
         new_user.setAlignment(Pos.CENTER);
         GridPane.setHalignment(new_user, HPos.CENTER);
 
         exit Exit = new exit();
         exit.setOnAction(e -> {Exit.platform_way(new_window,"Are You Sure Wanna Leave Login Page? ");window.close();});
-        forgot.setOnAction(e -> {forget_pass.start();Exit.platform_way(new_window,"Are You Sure Wanna exit? ");window.close();});
-//        new_user.setOnAction(e -> );
+        forgot.setOnAction(e -> {forget_pass.start();Exit.platform_way(new_window,"Are You Sure Wanna Leave Login page? ");window.close();});
+        new_user.setOnAction(e -> {
+            try {
+                user_reg.start();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(10);
         gridPane.setVgap(10);
@@ -204,6 +209,7 @@ public class Login extends Application {
         window.setScene(scene);
         window.showAndWait();
     }
+
     public static void main(String[] args) {
         launch(args);
     }

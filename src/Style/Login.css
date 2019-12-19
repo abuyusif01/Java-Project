@@ -1,8 +1,53 @@
 .button {
    -fx-text-fill:  #e5e9f0;
    -fx-background-color: #3b4254;
+   -fx-background-radius: 10;
+
+}
+
+#help_button:focused{
+    -fx-background-color: transparent;
+    -fx-text-fill:  #e5e9f0;
+}
+
+#help_button{
+    -fx-background-color: transparent;
+    -fx-text-fill:  #3b4254;
+}
+
+#help_button:hover{
+    -fx-background-color: transparent;
+    -fx-text-fill:  red;
+}
+.button:hover{
+    -fx-background-color: #81a1c1;
 }
 
 .root {
--fx-background-color: #81a1c1  ;
+    -fx-background-color: #e5e9f0;
+    -fx-font-family: "Fira Code";
+}
+
+.text-field {
+    -fx-background-color: #e5e9f0 ,#3b4254, #e5e9f0;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 1 -1;
+    -fx-fill: #3b4254;
+
+}
+
+.text-field:focused {
+    -fx-background-color: #a9a9a9, #3b4254,  #e5e9f0;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 1 -1;
+}
+
+#name_label{
+    -fx-font-size: 10pt;
+    -fx-font-weight: bold;
+    -fx-fill: #e5e9f0;
+
+}
+
+#password_label{
+    -fx-font-size: 10pt;
+    -fx-font-weight: bold;
 }

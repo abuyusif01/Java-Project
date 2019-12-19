@@ -11,7 +11,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class subject_registration  {
@@ -101,15 +100,19 @@ public class subject_registration  {
         gridPane.add(Main_text, 0,0,2,1);
         gridPane.setAlignment(Pos.CENTER);
 
-
+        //for saving user Credentials
         user_info Credentials = new user_info();
+
         //create event handler
         Submit_subject.setOnAction(e ->{
             Credentials.insert_user_subject(Email.getText(),Subject_name_field.getText());
             FirstStage.close();
         });
+
         //no need to comment
         first_scene = new Scene(gridPane);
+        String css = getClass().getResource("subject_registration").toExternalForm();
+        first_scene.getStylesheets().add(css);
         this.test=return_stage(FirstStage);
         FirstStage.setScene(first_scene);
 
@@ -117,9 +120,6 @@ public class subject_registration  {
     }
     public Stage return_stage(Stage stage){
         return stage;
-    }
-    public Scene return_scene(Scene scene){
-        return scene;
     }
 
 }

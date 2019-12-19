@@ -1,6 +1,7 @@
 package Registration;
 
-import Forgot_password.forgot_password;
+import Login.*;
+import Sub_Reg.subject_registration;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,7 +27,11 @@ public class registration  {
 
         // Create a scene with registration form grid pane as the root node
         Scene scene = new Scene(gridPane, 800, 500);
-        // Set the scene in primary stage
+
+        //style
+        String css = getClass().getResource("registration.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
         // Add Header
         Label headerLabel = new Label("Registration Form");
         headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
@@ -73,26 +78,22 @@ public class registration  {
 
         //create obj to store user data
         user_info Credentials = new user_info();
-        forgot_password bull = new forgot_password();
-
         submitButton.setOnAction(event -> {
             if (nameField.getText().isEmpty()) {
-                showAlert(gridPane.getScene().getWindow(), "Form Error!", "Please enter your name");
+                showAlert(gridPane.getScene().getWindow(), "Please enter your name");
                 return;
             }
             if (emailField.getText().isEmpty()) {
-                showAlert(gridPane.getScene().getWindow(), "Form Error!", "Please enter your email id");
+                showAlert(gridPane.getScene().getWindow(), "Please enter your email id");
                 return;
             }
             if (passwordField.getText().isEmpty()) {
-                showAlert(gridPane.getScene().getWindow(), "Form Error!", "Please enter a password");
+                showAlert(gridPane.getScene().getWindow(), "Please enter a password");
                 return;
             }
 
             //try adding registered user to user_info file
             Credentials.insert_user_info(emailField.getText(),passwordField.getText(),nameField.getText());
-            bull.start();
-
         });
 
         primaryStage.setScene(scene);
@@ -131,9 +132,9 @@ public class registration  {
         return gridPane;
     }
 
-    private void showAlert(Window owner, String title, String message) {
+    private void showAlert(Window owner, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
+        alert.setTitle("Form Error!");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.initOwner(owner);
