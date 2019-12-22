@@ -71,11 +71,14 @@ public class user_info {
     public  String getUser_subject(String Email, String Subject_Code) throws FileNotFoundException {
         Scanner read_file = new Scanner(new File(filePath_user_subject));
         String fileEmail,fileSubject_Code;
-        while (read_file.hasNextLine()){
+        while (read_file.hasNextLine()) {
             fileEmail = read_file.next();
             fileSubject_Code = read_file.next();
-            if(fileEmail.equals(Email)&&fileSubject_Code.equals(Subject_Code)){
-            return "file Found"; }
+            if (fileEmail.equals(Email) && fileSubject_Code.equals(Subject_Code)) {
+                return "file Found";
+            } else{
+                return "file not found";
+            }
         }
         return "file not found";
     }

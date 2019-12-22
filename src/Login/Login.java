@@ -1,5 +1,6 @@
 package Login;
 
+import Dashboard.dashboard;
 import Forgot_password.forgot_password;
 import Registration.*;
 import javafx.application.Application;
@@ -19,6 +20,7 @@ import java.io.IOException;
 
 public class Login extends Application {
     public Stage test;
+    public static  String UserName;
     @Override
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Login");
@@ -124,7 +126,7 @@ public class Login extends Application {
 
         //method for authentication
         user_info Credentials = new user_info();
-
+        dashboard Dash = new dashboard();
 
         boolean[] search = {false};
 
@@ -138,12 +140,16 @@ public class Login extends Application {
                 showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter a password");
             }
             try {
-                 search[0] = Credentials.auth(nameField.getText(),passwordField.getText());
+                search[0] = Credentials.auth(nameField.getText(),passwordField.getText());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
             if(search[0]){
                 showAlert(Alert.AlertType.INFORMATION, gridPane.getScene().getWindow(), "Logged in...", "Welcome back "+nameField.getText());
+                UserName = nameField.getText();
+                test.close();
+                Dash.start(test);
+
             }else{
                 showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Logged in...", "Check your Credentials and try again");
             }

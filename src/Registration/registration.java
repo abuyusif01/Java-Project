@@ -1,7 +1,6 @@
 package Registration;
 
-import Login.*;
-import Sub_Reg.subject_registration;
+import Dashboard.dashboard;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,8 +15,9 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import java.io.IOException;
 
-public class registration  {
 
+public class registration  {
+    public static  String user;
     public void start() throws IOException {
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Registration Form");
@@ -34,7 +34,7 @@ public class registration  {
 
         // Add Header
         Label headerLabel = new Label("Registration Form");
-        headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        headerLabel.setFont(Font.font("Fira Code", FontWeight.BOLD, 24));
         gridPane.add(headerLabel, 0, 0, 2, 1);
         GridPane.setHalignment(headerLabel, HPos.CENTER);
         GridPane.setMargin(headerLabel, new Insets(20, 0, 20, 0));
@@ -47,7 +47,6 @@ public class registration  {
         TextField nameField = new TextField();
         nameField.setPrefHeight(40);
         gridPane.add(nameField, 1, 1);
-
 
         // Add Email Label
         Label emailLabel = new Label("Email ID : ");
@@ -78,6 +77,7 @@ public class registration  {
 
         //create obj to store user data
         user_info Credentials = new user_info();
+        dashboard Dash = new dashboard();
         submitButton.setOnAction(event -> {
             if (nameField.getText().isEmpty()) {
                 showAlert(gridPane.getScene().getWindow(), "Please enter your name");
@@ -91,9 +91,12 @@ public class registration  {
                 showAlert(gridPane.getScene().getWindow(), "Please enter a password");
                 return;
             }
-
+            user = nameField.getText();
+            Credentials.insert_user_info(emailField.getText(),nameField.getText(),passwordField.getText());
+            primaryStage.close();
+            Dash.start(primaryStage);
             //try adding registered user to user_info file
-            Credentials.insert_user_info(emailField.getText(),passwordField.getText(),nameField.getText());
+
         });
 
         primaryStage.setScene(scene);
