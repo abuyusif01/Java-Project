@@ -1,7 +1,6 @@
 package Registration;
 
-import Login.*;
-import Sub_Reg.subject_registration;
+import Dashboard.dashboard;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,7 +16,7 @@ import javafx.stage.Window;
 import java.io.IOException;
 
 public class registration  {
-
+    public static  String user;
     public void start() throws IOException {
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Registration Form");
@@ -34,20 +33,20 @@ public class registration  {
 
         // Add Header
         Label headerLabel = new Label("Registration Form");
-        headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        headerLabel.setFont(Font.font("Fira Code", FontWeight.BOLD, 24));
         gridPane.add(headerLabel, 0, 0, 2, 1);
         GridPane.setHalignment(headerLabel, HPos.CENTER);
         GridPane.setMargin(headerLabel, new Insets(20, 0, 20, 0));
 
         // Add Name Label
-        Label nameLabel = new Label("Full Name : ");
+        Label nameLabel = new Label("Username : ");
         gridPane.add(nameLabel, 0, 1);
 
         // Add Name Text Field
         TextField nameField = new TextField();
+        nameField.setPromptText("Your Username Pls");
         nameField.setPrefHeight(40);
         gridPane.add(nameField, 1, 1);
-
 
         // Add Email Label
         Label emailLabel = new Label("Email ID : ");
@@ -55,29 +54,49 @@ public class registration  {
 
         // Add Email Text Field
         TextField emailField = new TextField();
+        emailField.setPromptText("Your Email Pls");
         emailField.setPrefHeight(40);
         gridPane.add(emailField, 1, 2);
 
         // Add Password Label
         Label passwordLabel = new Label("Password : ");
         gridPane.add(passwordLabel, 0, 3);
+        // Add faculty level
+        Label FacultyLabel = new Label("Faculty : ");
+        gridPane.add(FacultyLabel, 0, 4);
+        
+        Label CreditLabel = new Label("Credit : ");
+        gridPane.add(CreditLabel, 0, 5);
 
-        // Add Password Field
+        // Add Faculty Field
         PasswordField passwordField = new PasswordField();
+        passwordField.setPromptText("Your Password");
         passwordField.setPrefHeight(40);
         gridPane.add(passwordField, 1, 3);
+        
+        TextField FacultyField = new TextField();
+        FacultyField.setPromptText("Enter Your Kulliyah");
+        FacultyField.setPrefHeight(40);
+        gridPane.add(FacultyField, 1, 4);
 
+        //create credit hours
+        TextField CreditField = new TextField();
+        CreditField.setPromptText("Enter Current Credit Hours");
+        CreditField.setPrefHeight(40);
+        gridPane.add(CreditField, 1, 5);
+        
         // Add Submit Button
         Button submitButton = new Button("Submit");
         submitButton.setPrefHeight(40);
         submitButton.setDefaultButton(true);
         submitButton.setPrefWidth(100);
-        gridPane.add(submitButton, 0, 4, 2, 1);
+        gridPane.add(submitButton, 0, 6, 2, 1);
         GridPane.setHalignment(submitButton, HPos.CENTER);
         GridPane.setMargin(submitButton, new Insets(20, 0, 20, 0));
 
         //create obj to store user data
         user_info Credentials = new user_info();
+        dashboard Dash = new dashboard();
         submitButton.setOnAction(event -> {
             if (nameField.getText().isEmpty()) {
                 showAlert(gridPane.getScene().getWindow(), "Please enter your name");
@@ -91,9 +110,22 @@ public class registration  {
                 showAlert(gridPane.getScene().getWindow(), "Please enter a password");
                 return;
             }
+            if (FacultyField.getText().isEmpty()) {
+                showAlert(gridPane.getScene().getWindow(), "Please Your Kulliyah");
+                return;
+            }
+            if (CreditField.getText().isEmpty()) {
+                showAlert(gridPane.getScene().getWindow(), "Please Enter Your Credit Hours");
+                return;
+            }
+            
+            user = nameField.getText();
+            Credentials.insert_user_info(user_info.get_hash(nameField.getText()),user_info.get_hash(passwordField.getText()));
 
-            //try adding registered user to user_info file
-            Credentials.insert_user_info(emailField.getText(),passwordField.getText(),nameField.getText());
+            Credentials.Create_dir(user_info.get_hash(nameField.getText()),nameField.getText(),
+                    user_info.get_hash(passwordField.getText()),emailField.getText(),FacultyField.getText(),"Semester_2",CreditField.getText());
+            primaryStage.close();
+            Dash.start(primaryStage);
         });
 
         primaryStage.setScene(scene);
@@ -104,20 +136,11 @@ public class registration  {
     private GridPane createRegistrationFormPane() {
         // Instantiate a new Grid Pane
         GridPane gridPane = new GridPane();
-
-        // Position the pane at the center of the screen, both vertically and horizontally
         gridPane.setAlignment(Pos.CENTER);
-
-        // Set a padding of 20px on each side
         gridPane.setPadding(new Insets(40, 40, 40, 40));
 
-        // Set the horizontal gap between columns
         gridPane.setHgap(10);
-
-        // Set the vertical gap between rows
         gridPane.setVgap(10);
-
-        // Add Column Constraints
 
         // columnOneConstraints will be applied to all the nodes placed in column one.
         ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 100, Double.MAX_VALUE);
