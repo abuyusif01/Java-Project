@@ -66,15 +66,15 @@ public class Search_Subject extends GridPane{
                 showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your Email");
                 return;
             }
-            if (Subject_name.getText().isEmpty()){showAlert(Alert.AlertType.ERROR,gridPane.getScene().getWindow(),"Error","Pls Subject name");
-            return;
-            }
-            try {
-                found[0] = Credentials.getUser_subject(Email.getText(),Subject_name.getText());
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            showAlert(Alert.AlertType.INFORMATION,gridPane.getScene().getWindow(),"Success",found[0]);
+//            if (Subject_name.getText().isEmpty()){showAlert(Alert.AlertType.ERROR,gridPane.getScene().getWindow(),"Error","Pls Subject name");
+//            return;
+//            }
+//            try {
+////                found[0] = Credentials.getUser_subject(Email.getText(),Subject_name.getText);
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//            showAlert(Alert.AlertType.INFORMATION,gridPane.getScene().getWindow(),"Success",found[0]);
         });
 
     }

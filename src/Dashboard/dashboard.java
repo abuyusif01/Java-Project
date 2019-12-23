@@ -2,20 +2,23 @@ package Dashboard;
 
 import Login.Login;
 import Login.exit;
-import Registration.registration;
+import Registration.*;
 import Sub_Reg.Search_Subject;
 import Sub_Reg.subject_registration;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import java.io.IOException;
 
 public class dashboard extends Application {
     public Stage test;
+    public static VBox box = new VBox();
     subject_registration subject_reg = new subject_registration();
     Search_Subject search_subject = new Search_Subject();
     exit Exit = new exit();
@@ -43,10 +46,10 @@ public class dashboard extends Application {
             Home.setText("Mr "+new_user);
         }
         Logout.setId("logout_button");
-        Logout.setFocusTraversable(true);
         Home.setId("home_button");
 
         VBox vBox = new VBox(Sub_reg,search_sub,search_info,About);
+        box = vBox;
         vBox.setId("left_box");
         HBox hBox = new HBox();
         hBox.setId("top_box");
@@ -60,7 +63,9 @@ public class dashboard extends Application {
 
         Sub_reg.setOnAction(new subject_reg());
         search_sub.setOnAction(new search_sub());
+        search_info.setOnAction(new search_info());
         Logout.setOnAction(new Logout());
+
         String css = getClass().getResource("dashboard.css").toExternalForm();
         index.getStylesheets().add(css);
         primaryStage.setTitle("Dashboard");
@@ -70,21 +75,42 @@ public class dashboard extends Application {
 
     class subject_reg implements EventHandler<ActionEvent> {
         @Override
-
         public void handle(ActionEvent e) { root.setCenter(subject_reg);}
     }
 
-    class search_sub implements EventHandler<ActionEvent> {
+    static class search_sub implements EventHandler<ActionEvent> {
+        boolean key;
         @Override
-
-        public void handle(ActionEvent e) { root.setCenter(search_subject);}
+        public void handle(ActionEvent e)  {
+            try {
+                dashboard boar = new dashboard();
+                key = new user_info().getUser_subject(user_info.get_hash(Login.UserName));
+                if(!key){ boar.showAlert(box.getScene().getWindow(), "Please enter a password");}
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
+    static class search_info implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent e) {
+            new user_info().getUser_info(user_info.get_hash(Login.UserName));
+        }
+    }
+
     class Logout implements EventHandler<ActionEvent> {
         @Override
-
         public void handle(ActionEvent e) {Exit.platform_way(test,"Are YoU SuRe You Wanna LogOut");}
     }
 
+    private void showAlert(Window owner, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Form Error!");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.initOwner(owner);
+        alert.show();
+    }
    public static void main(String[] args) {
         launch(args);
     }

@@ -78,7 +78,7 @@ public class Login extends Application {
         Button help_forget = new Button("Need help?");
         help_forget.setId("help_button");
         help_forget.setUnderline(true);
-        help_forget.setFocusTraversable(true);
+//        help_forget.setFocusTraversable(true);
 
         headerLabel.setFont(Font.font("Fira Code", FontWeight.BOLD, 24));
         gridPane.add(headerLabel, 0,0,2,1);
@@ -94,7 +94,6 @@ public class Login extends Application {
         TextField nameField = new TextField();
         nameField.setPromptText("Enter Your Username");
         nameField.setId("name_field");
-        nameField.setFocusTraversable(false);
         gridPane.add(nameField, 1,1);
 
 
@@ -107,14 +106,11 @@ public class Login extends Application {
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Enter Your password");
         passwordField.setId("password_field");
-        passwordField.setFocusTraversable(false);
         gridPane.add(passwordField, 1, 3);
 
         // Add Login Button
         Button submitButton = new Button("Login");
         submitButton.setId("Login_button");
-        submitButton.setPrefHeight(10);
-        submitButton.setPrefWidth(100);
         submitButton.setAlignment(Pos.CENTER);
 
         gridPane.add(submitButton, 1, 4);
@@ -140,7 +136,7 @@ public class Login extends Application {
                 showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter a password");
             }
             try {
-                search[0] = Credentials.auth(nameField.getText(),passwordField.getText());
+                search[0] = Credentials.auth(user_info.get_hash(nameField.getText()),user_info.get_hash(passwordField.getText()));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -176,47 +172,36 @@ public class Login extends Application {
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
         window.setMinWidth(250);
-        GridPane gridPane = new GridPane();
 
-        Label label = new Label();
-        label.setText("You're Welcome :) ");
         Button exit = new Button("exit");
         Button forgot = new Button("forgot pass");
         Button new_user = new Button("New_User?");
-        new_user.setUnderline(true);
-        new_user.setMaxWidth(Double.MAX_VALUE);
-        new_user.setAlignment(Pos.CENTER);
-        GridPane.setHalignment(new_user, HPos.CENTER);
+        HBox hBox = new HBox(forgot,exit,new_user);
+        hBox.setSpacing(10);
+        hBox.setAlignment(Pos.CENTER);
 
         exit Exit = new exit();
         exit.setOnAction(e -> {Exit.platform_way(new_window,"Are You Sure Wanna Leave Login Page? ");window.close();});
         forgot.setOnAction(e -> {forget_pass.start();Exit.platform_way(new_window,"Are You Sure Wanna Leave Login page? ");window.close();});
         new_user.setOnAction(e -> {
             try {
+                window.close();
+                new_window.close();
                 user_reg.start();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         });
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.add(label, 0,0,2,1);
-        gridPane.add(exit,0,4);
-        gridPane.add(new_user,0,5);
-        gridPane.add(forgot,0,6);
-        GridPane.setHalignment(label, HPos.CENTER);
-        label.setFont(Font.font("Fira Code", FontWeight.BOLD, 24));
 
         //Display window and wait for it to be closed before returning
-        Scene scene = new Scene(gridPane);
+        Scene scene = new Scene(hBox);
         String css = getClass().getResource("Login.css").toExternalForm();
         scene.getStylesheets().add(css);
         window.setScene(scene);
         window.showAndWait();
     }
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
         launch(args);
     }
 }
