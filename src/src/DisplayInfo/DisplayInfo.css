@@ -1,0 +1,18 @@
+.button {
+   -fx-text-fill:  #e5e9f0;
+   -fx-background-color: #3b4254;
+   -fx-background-radius: 10;
+
+}
+
+#Clear_button{
+    -fx-text-fill:  #e5e9f0;
+    -fx-background-color: #3b4254;
+    -fx-background-radius: 10;
+    -fx-pref-height: 30px;
+}
+
+#Clear_button:hover{
+    -fx-background-color: #81a1c1;
+    -fx-text-fill:  #3b4254;
+}
