@@ -1,0 +1,17 @@
+.button {
+   -fx-text-fill:  #e5e9f0;
+   -fx-background-color: #3b4254;
+   -fx-background-radius: 10;
+
+}
+
+#submit_button{
+    -fx-text-fill:  #e5e9f0;
+    -fx-background-color: #3b4254;
+    -fx-background-radius: 10;
+    -fx-pref-height: 30px;
+}
+
+#submit_button:hover{
+    -fx-background-color: #81a1c1;
+}
