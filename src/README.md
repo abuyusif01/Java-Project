@@ -14,7 +14,7 @@ To-do:
 3. Allow Student to chat with each other.
 
 "D-Schedule" came in to reality for the sake of the following heroes.
-1. Material Ocean help with the color schema :: github.com/material-ocean.
+1. [Material Ocean](github.com/material-ocean) help with the color schema
 2. Of-course never forget with github they helped us all the time. they do host our Code for free.
 3. Credit goes to Google, Stack-over and many more online tutorials.
 4. Finally Our lecturer Dr, Ameer. The motivation behind this thing.
