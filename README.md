@@ -19,5 +19,5 @@ To-do:
 3. Credit goes to Google, Stack-over and many more online tutorials.
 4. Finally Our lecturer Dr, Ameer. The motivation behind this thing.
 
-Written and documented by [me](this](https://github.com/blackdracula18)
+Written and documented by [me](https://github.com/blackdracula18)
 
