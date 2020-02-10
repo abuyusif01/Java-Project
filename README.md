@@ -6,6 +6,7 @@ The application is created to ease Our life (student) "No more procrastination i
 4. Well documented application.
 5. The code is free for any kind of distribution, (just don't claim you're the developer)
 6. Great Project Structure, No more pain the ass searching for something in project.
+7. [This](https://github.com/blackdracula18/Java-Project/blob/master/src/Resources/Documentation) folder include all related documentations.
 
 The application is Capable of doing many stuff at this date. and hoping we'll find contributors to this dummy application and make it reach more and more users.
 
